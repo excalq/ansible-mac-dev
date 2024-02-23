@@ -11,6 +11,15 @@
     sed_path: "{{ sed_which_result.stdout }}"
   when: sed_path is undefined
 
+# Sudo local (pam.d) configuration.
+- name: Copy sudoers configuration into place.
+  copy:
+    content: "{{ sudo_local_config }}"
+    dest: /etc/pam.d/sudo_local
+    mode: 0440
+  become: true
+  when: use_sudo_local
+
 # Sudoers configuration.
 - name: Copy sudoers configuration into place.
   copy:
@@ -19,3 +28,4 @@
     mode: 0440
     validate: 'visudo -cf %s'
   become: true
+  when: not use_sudo_local
