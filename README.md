@@ -6,6 +6,16 @@
 
 This playbook installs and configures most of the software I use on my Mac for web and software development. Some things in macOS are slightly difficult to automate, so I still have a few manual installation steps, but at least it's all documented here.
 
+## Fork Info
+
+This is @excalq's fork of the very well-made [Ansible Mac-Dev-Playbook by Jeff Geerling](https://github.com/geerlingguy/mac-dev-playbook)
+
+This changes the following:
+- Replace Sublime Text with VS Code
+- Sets up sudo via fingerprint (Sonoma 14.3+)
+- Removes some packages: Composer, PHP, etc.
+- Adds some packages: Neovim, Docker Compose, Slack, PIP packages etc.
+
 ## Installation
 
   1. Ensure Apple's command line tools are installed (`xcode-select --install` to launch the installer).
@@ -106,14 +116,19 @@ Applications (installed with Homebrew Cask):
   - [nvALT](http://brettterpstra.com/projects/nvalt/)
   - [Sequel Ace](https://sequel-ace.com) (MySQL client)
   - [Slack](https://slack.com/)
-  - [Sublime Text](https://www.sublimetext.com/)
+  - [Starship](https://starship.rs)
+  - [VS Code](https://code.visualstudio.com/)
   - [Transmit](https://panic.com/transmit/) (S/FTP client)
 
 Packages (installed with Homebrew):
 
   - autoconf
   - bash-completion
+  - brave-browser
   - doxygen
+  - docker
+  - docker-compose
+  - firefox
   - gettext
   - gifsicle
   - git
@@ -122,20 +137,24 @@ Packages (installed with Homebrew):
   - gpg
   - httpie
   - iperf
+  - karabiner-elements
   - libevent
   - sqlite
+  - neovim
   - nmap
   - node
   - nvm
-  - php
+  - slack
   - ssh-copy-id
   - cowsay
   - readline
   - openssl
   - pv
+  - starship
   - wget
   - wrk
   - zsh-history-substring-search
+
 
 My [dotfiles](https://github.com/geerlingguy/dotfiles) are also installed into the current user's home directory, including the `.osx` dotfile for configuring many aspects of macOS for better performance and ease of use. You can disable dotfiles management by setting `configure_dotfiles: no` in your configuration.
 
@@ -162,7 +181,7 @@ Check out [Ansible for DevOps](https://www.ansiblefordevops.com/), which teaches
 
 ## Author
 
-This project was created by [Jeff Geerling](https://www.jeffgeerling.com/) (originally inspired by [MWGriffin/ansible-playbooks](https://github.com/MWGriffin/ansible-playbooks)).
+This project was forked by [Arthur kepler](https://www.arthurk.com/) from that created by [Jeff Geerling](https://www.jeffgeerling.com/) (originally inspired by [MWGriffin/ansible-playbooks](https://github.com/MWGriffin/ansible-playbooks)).
 
-[badge-gh-actions]: https://github.com/geerlingguy/mac-dev-playbook/workflows/CI/badge.svg?event=push
-[link-gh-actions]: https://github.com/geerlingguy/mac-dev-playbook/actions?query=workflow%3ACI
+[badge-gh-actions]: https://github.com/excalq/ansible-mac-dev/workflows/CI/badge.svg?event=push
+[link-gh-actions]: https://github.com/excalq/ansible-mac-dev/actions?query=workflow%3ACI
