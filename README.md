@@ -27,7 +27,17 @@ This changes the following:
 
   3. Clone or download this repository to your local drive.
   4. Run `ansible-galaxy install -r requirements.yml` inside this directory to install required Ansible roles.
-  5. Run `ansible-playbook main.yml --ask-become-pass` inside this directory. Enter your macOS account password when prompted for the 'BECOME' password.
+  5. If Using OSX 14.0+ (Sonoma) and `use_sudo_local` is set in config.yaml: 
+        
+      1. Register your fingerprints in OSX settings.
+      2. Run `ansible-playbook main.yml --tags sudoers`
+      3. Run `sudo -v`, providing your fingerprint. This allows Ansible sudo access for 5 minutes within this terminal.
+      4. Run Ansible: `ansible-playbook main.yml`
+
+  6. If OSX <14 (Ventura, earlier) or not using `use_sudo_local`:
+    
+      1. Optionally, set sudoers config to allow a passwordless use of sudo. It's better security practice to disable this afterward.
+      2. Otherwise, run `ansible-playbook main.yml --ask-become-pass` inside this directory. Enter your macOS account password when prompted for the 'BECOME' password. This will be necessary on each run of Ansible, unless the above approach is used.
 
 > Note: If some Homebrew commands fail, you might need to agree to Xcode's license or fix some other Brew issue. Run `brew doctor` to see if this is the case.
 
