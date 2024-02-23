@@ -1,4 +1,18 @@
 ---
+# Install the iTerm2 terminal app
+- name: Download and Install iTerm2
+  unarchive:
+    src: https://iterm2.com/downloads/stable/latest
+    dest: /Applications/
+    remote_src: true
+    creates: /Applications/iTerm.app
+
+# Note, starship in `homebrew_installed_packages`
+- name: Install Starship Config
+  template:
+    src: templates/starship/starship.toml
+    dest: ~/.config/starship.toml
+
 # Custom Terminal theme.
 - name: Get current Terminal profile.
   command: defaults read com.apple.terminal 'Default Window Settings'

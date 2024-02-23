@@ -7,26 +7,55 @@ configure_osx: true
 
 # Set to 'true' to configure the Dock via dockutil.
 configure_dock: false
-dockitems_remove: []
+dockitems_remove:
 # - Launchpad
-# - TV
-# - Podcasts
-# - 'App Store'
-dockitems_persist: []
-# - name: "Sublime Text"
-#   path: "/Applications/Sublime Text.app/"
-#   pos: 5
+ - TV
+ - Contacts
+ - Notes
+ - Freeform
+ - Podcasts
+ - Messages
+ - Maps
+ - Photos
+ - 'App Store'
+dockitems_persist:
+- name: "Brave"
+  path: "/Applications/Brave Browser.app/"
+  pos: 1
+- name: "Firefox"
+  path: "/Applications/Firefox.app/"
+  pos: 2
+- name: "Safari"
+  path: "/Applications/Safari.app/"
+  pos: 3
+- name: "VS Code"
+  path: "/Applications/Visual Studio Code.app/"
+  pos: 4
+- name: "iTerm2"
+  path: "/Applications/iTerm.app/"
+  pos: 5
+- name: "Slack"
+  path: "/Applications/Slack.app/"
+  pos: 6
 
 configure_sudoers: false
+# Option A: (MacOS Sonoma 14.3+ only) Sudo via fingerprint/yubikey, see /etc/pam.d/sudo_local.template
+use_sudo_local: true # Sonoma+ only!
+sudo_local_config: |
+  # sudo_local: local config file which survives system update and is included for sudo
+  # uncomment following line to enable Touch ID for sudo
+  auth       sufficient     pam_tid.so
+  # yubikey auth can be added here as well
+# Option B: Generic sudoers, using /private/etc/sudoers.d/custom
 sudoers_custom_config: ''
 # Example:
 # sudoers_custom_config: |
 #   # Allow users in admin group to use sudo with no password.
 #   %admin ALL=(ALL) NOPASSWD: ALL
 
-dotfiles_repo: https://github.com/geerlingguy/dotfiles.git
+dotfiles_repo: git@github.com:excalq/dotfiles.git
 dotfiles_repo_accept_hostkey: true
-dotfiles_repo_local_destination: ~/Development/GitHub/dotfiles
+dotfiles_repo_local_destination: ~/code/dotfiles
 dotfiles_files:
   - .zshrc
   - .gitignore
@@ -39,6 +68,7 @@ homebrew_installed_packages:
   - autoconf
   - bash-completion
   - doxygen
+  - docker-compose
   - gettext
   - gifsicle
   - git
@@ -49,33 +79,32 @@ homebrew_installed_packages:
   - iperf
   - libevent
   - sqlite
+  - neovim
   - nmap
   - node
   - nvm
-  - php
   - ssh-copy-id
   - cowsay
   - readline
   - openssl
   - pv
+  - starship
   - wget
   - wrk
   - zsh-history-substring-search
 
 homebrew_taps: []
 
+# Warning: Remove/rename manually installed Apps before adding those here, avoiding permission errors
 homebrew_cask_appdir: /Applications
 homebrew_cask_apps:
-  - chromedriver
   - docker
-  - dropbox
+  - brave-browser
   - firefox
-  - google-chrome
+  - karabiner-elements
   - handbrake
-  - licecap
   - sequel-ace
   - slack
-  - sublime-text
   - transmit
 
 # See `geerlingguy.mas` role documentation for usage instructions.
@@ -100,28 +129,28 @@ npm_packages: []
 # - name: webpack
 #   state: present # present/absent/latest, default: present
 #   version: "^2.6" # default: N/A
-pip_packages: []
+pip_packages:
+- name: slither
+- name: click
+- name: jupyterlab
+- name: pandas
+- name: tqdm
 # - name: mkdocs
 #   state: present # present/absent/latest, default: present
 #   version: "0.16.3" # default: N/A
 
-# Set to 'true' to configure Sublime Text.
-configure_sublime: false
-sublime_base_path: '~/Library/Application Support/Sublime Text'
-sublime_config_path: "Packages/User"
-sublime_package_control:
-  - "DocBlockr"
-  - "Dockerfile Syntax Highlighting"
-  - "FileDiffs"
-  - "GitHub Flavored Markdown Preview"
-  - "Jinja2"
-  - "Package Control"
-  - "PHP-Twig"
-  - "Pretty JSON"
-  - "SublimeLinter"
-  - "SublimeLinter-contrib-yamllint"
-  - "TrailingSpaces"
-  - "WordCount"
+# Set to 'true' to configure VS Code. See https://github.com/gantsign/ansible-role-visual-studio-code
+configure_vscode: true
+visual_studio_code_config_path: 
+vscode_user_config:
+  - username: arthur
+    visual_studio_code_extensions:
+      - ms-python.python
+      - streetsidesoftware.code-spell-checker
+      - redhat.ansible
+      - wholroyd.jinja
+      - hashicorp.terraform
+      - github.copilot
 
 # Glob pattern to ansible task files to run after all other tasks are finished.
 post_provision_tasks: []
