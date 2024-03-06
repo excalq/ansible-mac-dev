@@ -65,32 +65,38 @@ dotfiles_files:
 
 homebrew_installed_packages:
   # - ansible # Installed via Pip.
+  - act # Github Actions local CLI
+  - asdf # Dev tools version manager
   - autoconf
   - bash-completion
-  - doxygen
+  - cowsay 
+  - diff-so-fancy # Better git diffs
   - docker-compose
+  - doxygen
   - gettext
+  - gh # Github CLI
   - gifsicle
   - git
-  - gh
   - go
   - gpg
   - httpie
   - iperf
   - libevent
-  - sqlite
+  - minikube
   - neovim
   - nmap
   - node
   - nvm
-  - ssh-copy-id
-  - cowsay
-  - readline
   - openssl
-  - pv
-  - starship
+  - pv # Pipe Viewer (progress bars)
+  - readline
+  - sqlite
+  - ssh-copy-id
+  - starship # Beautiful prompts
+  - virtualenv
   - wget
-  - wrk
+  - wrk # HTTP benchmarking tool
+  - yarn
   - zsh-history-substring-search
 
 homebrew_taps: []
@@ -98,10 +104,13 @@ homebrew_taps: []
 # Warning: Remove/rename manually installed Apps before adding those here, avoiding permission errors
 homebrew_cask_appdir: /Applications
 homebrew_cask_apps:
-  - docker
   - brave-browser
+  - discord
+  - docker
   - firefox
-  - karabiner-elements
+  - font-hack-nerd-font
+  - font-hasklug-nerd-font
+  - font-ubuntu-mono-nerd-font
   - handbrake
   - sequel-ace
   - slack
